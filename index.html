@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zaika House — fresh, delicious food made with love. Explore our menu and reserve your table.">
+  <title>Zaika House | Restaurant & Cafe</title>
+  <style>
+    :root {
+      --bg: #fffaf3;
+      --ink: #24201c;
+      --muted: #71685e;
+      --brand: #b63b25;
+      --brand-dark: #842719;
+      --gold: #e7ad53;
+      --card: #ffffff;
+      --line: #eadfd2;
+      --green: #315b43;
+      --shadow: 0 18px 50px rgba(61, 36, 19, .10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    .container { width: min(1120px, 92%); margin: 0 auto; }
+    .topbar { background: var(--green); color: #fff; text-align: center; padding: 8px 12px; font-size: .88rem; }
+    header { position: sticky; top: 0; z-index: 20; background: rgba(255,250,243,.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(234,223,210,.8); }
+    .nav { display: flex; align-items: center; justify-content: space-between; min-height: 76px; gap: 18px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 900; letter-spacing: -.04em; font-size: 1.35rem; }
+    .logo-mark { display: grid; place-items: center; width: 42px; height: 42px; background: var(--brand); color: white; border-radius: 14px 14px 14px 4px; font-size: 1.35rem; }
+    .logo span small { display: block; color: var(--muted); font-size: .62rem; letter-spacing: .17em; text-transform: uppercase; font-weight: 700; margin-top: -5px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; color: #51483f; font-weight: 650; font-size: .94rem; }
+    .nav-links a:hover { color: var(--brand); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 999px; padding: 13px 21px; background: var(--brand); color: #fff; font-weight: 800; cursor: pointer; box-shadow: 0 8px 20px rgba(182,59,37,.18); transition: transform .2s, background .2s; }
+    .btn:hover { transform: translateY(-2px); background: var(--brand-dark); }
+    .btn-outline { background: transparent; color: var(--brand); border: 1.5px solid var(--brand); box-shadow: none; }
+    .btn-outline:hover { color: #fff; }
+    .menu-toggle { display: none; background: transparent; border: 0; font-size: 1.7rem; cursor: pointer; }
+    .hero { padding: 70px 0 72px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 42px; }
+    .eyebrow { color: var(--brand); text-transform: uppercase; letter-spacing: .17em; font-weight: 900; font-size: .78rem; display: inline-flex; align-items: center; gap: 9px; }
+    .eyebrow:before { content: ""; width: 28px; height: 2px; background: var(--gold); }
+    h1 { font-size: clamp(2.7rem, 5.6vw, 5.2rem); line-height: 1.02; letter-spacing: -.06em; margin: 17px 0 22px; max-width: 650px; }
+    h1 em { color: var(--brand); font-family: Georgia, serif; font-weight: 500; }
+    .hero p { color: var(--muted); font-size: 1.08rem; max-width: 520px; margin-bottom: 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 32px; color: var(--muted); font-size: .9rem; }
+    .hero-meta strong { color: var(--ink); display: block; font-size: 1.05rem; }
+    .hero-art { position: relative; min-height: 440px; display: grid; place-items: center; }
+    .hero-circle { width: min(420px, 100%); aspect-ratio: 1; border-radius: 50%; background: #f1d8b9; position: relative; display: grid; place-items: center; box-shadow: inset 0 0 0 18px rgba(255,255,255,.25); }
+    .hero-circle:before { content: ""; position: absolute; inset: 28px; border: 1px dashed rgba(132,39,25,.3); border-radius: 50%; }
+    .food-plate { width: 76%; aspect-ratio: 1; border-radius: 50%; background: #fffdf8; box-shadow: 0 22px 45px rgba(80,40,10,.17); display: grid; place-items: center; font-size: clamp(7rem, 18vw, 12rem); transform: rotate(-8deg); }
+    .floating-note { position: absolute; background: #fff; padding: 14px 18px; border-radius: 18px; box-shadow: var(--shadow); font-weight: 800; }
+    .floating-note small { display: block; color: var(--muted); font-weight: 500; font-size: .78rem; }
+    .note-one { left: -3px; top: 54px; }
+    .note-two { right: -5px; bottom: 48px; }
+    .section { padding: 82px 0; }
+    .section-head { text-align: center; max-width: 650px; margin: 0 auto 38px; }
+    .section-head h2 { font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.1; letter-spacing: -.045em; margin: 12px 0; }
+    .section-head p { color: var(--muted); margin: 0; }
+    .features { background: #f5eadb; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .feature { background: rgba(255,255,255,.7); border: 1px solid rgba(234,223,210,.8); padding: 25px; border-radius: 22px; }
+    .feature-icon { font-size: 2rem; }
+    .feature h3 { margin: 10px 0 5px; font-size: 1.18rem; }
+    .feature p { color: var(--muted); margin: 0; font-size: .94rem; }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .dish { background: var(--card); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; box-shadow: 0 7px 22px rgba(61,36,19,.04); transition: transform .2s, box-shadow .2s; }
+    .dish:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .dish-image { min-height: 180px; display: grid; place-items: center; font-size: 5rem; background: linear-gradient(135deg, #f6dcb9, #f2c7a4); }
+    .dish:nth-child(2) .dish-image { background: linear-gradient(135deg, #e9d7ad, #c7d7ad); }
+    .dish:nth-child(3) .dish-image { background: linear-gradient(135deg, #f3c4a8, #e7a08d); }
+    .dish:nth-child(4) .dish-image { background: linear-gradient(135deg, #ead4b9, #d7b5a0); }
+    .dish:nth-child(5) .dish-image { background: linear-gradient(135deg, #f4d2a2, #e7b96f); }
+    .dish:nth-child(6) .dish-image { background: linear-gradient(135deg, #e4d7bb, #c8c3a1); }
+    .dish-body { padding: 19px; }
+    .dish-title { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+    .dish h3 { margin: 0; font-size: 1.12rem; }
+    .price { color: var(--brand); font-weight: 900; white-space: nowrap; }
+    .dish p { color: var(--muted); font-size: .9rem; margin: 9px 0 14px; }
+    .tag { display: inline-block; color: var(--green); background: #e8f0e7; border-radius: 999px; padding: 4px 9px; font-size: .72rem; font-weight: 800; }
+    .about { background: #28231e; color: white; }
+    .about-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 54px; align-items: center; }
+    .about-art { background: linear-gradient(145deg, #d9a15b, #9c3826); min-height: 360px; border-radius: 30px; display: grid; place-items: center; font-size: 9rem; position: relative; overflow: hidden; }
+    .about-art:after { content: ""; position: absolute; width: 270px; height: 270px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; }
+    .about .eyebrow { color: #f2bd72; }
+    .about h2 { font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1; letter-spacing: -.04em; margin: 14px 0 20px; }
+    .about p { color: #d3c8bc; }
+    .about-points { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0; }
+    .about-point { border-left: 2px solid var(--gold); padding-left: 13px; }
+    .about-point strong { display: block; font-size: 1.25rem; }
+    .about-point span { color: #d3c8bc; font-size: .86rem; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .review { background: white; border: 1px solid var(--line); border-radius: 20px; padding: 24px; }
+    .stars { color: #d9972d; letter-spacing: .12em; }
+    .review p { color: var(--muted); font-size: .95rem; }
+    .review strong { display: block; margin-top: 16px; }
+    .contact { background: #f5eadb; }
+    .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 32px; align-items: start; }
+    .contact-info { background: var(--green); color: white; border-radius: 24px; padding: 30px; }
+    .contact-info h3 { font-size: 1.6rem; margin-top: 0; }
+    .contact-row { display: flex; gap: 13px; margin: 20px 0; color: #e4eee4; }
+    .contact-row b { display: block; color: white; }
+    .contact-form { background: white; border: 1px solid var(--line); border-radius: 24px; padding: 30px; }
+    .contact-form h3 { margin-top: 0; font-size: 1.5rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label { display: block; font-weight: 750; font-size: .86rem; margin-bottom: 6px; }
+    input, select, textarea { width: 100%; padding: 12px 13px; border: 1px solid #ded4c8; border-radius: 12px; background: #fffdf9; outline: none; }
+    input:focus, select:focus, textarea:focus { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(182,59,37,.1); }
+    .field { margin-bottom: 14px; }
+    textarea { resize: vertical; min-height: 95px; }
+    .form-note { color: var(--muted); font-size: .8rem; margin: 12px 0 0; }
+    footer { background: #201c18; color: #d8cfc5; padding: 30px 0; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    footer .logo { color: white; }
+    footer .logo span small { color: #b6a99b; }
+    .footer-links { display: flex; gap: 18px; font-size: .9rem; }
+    .copyright { font-size: .82rem; color: #a99d91; }
+    .toast { position: fixed; bottom: 20px; left: 50%; transform: translate(-50%, 120px); background: #201c18; color: white; padding: 13px 18px; border-radius: 12px; z-index: 99; box-shadow: var(--shadow); transition: transform .3s; width: min(92%, 440px); text-align: center; }
+    .toast.show { transform: translate(-50%, 0); }
+    @media (max-width: 850px) {
+      .nav-links { display: none; position: absolute; top: 76px; left: 0; right: 0; background: var(--bg); padding: 20px 4%; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 14px; }
+      .nav-links.open { display: flex; }
+      .nav-links .btn { align-self: flex-start; }
+      .menu-toggle { display: block; }
+      .hero { padding: 48px 0 55px; }
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero-art { min-height: 350px; }
+      .hero-circle { width: min(340px, 90%); }
+      .note-one { left: 2%; top: 28px; }
+      .note-two { right: 0; bottom: 20px; }
+      .menu-grid, .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-art { min-height: 280px; }
+    }
+    @media (max-width: 560px) {
+      .topbar { font-size: .78rem; }
+      .nav { min-height: 68px; }
+      .nav-links { top: 68px; }
+      .logo { font-size: 1.15rem; }
+      .logo-mark { width: 37px; height: 37px; }
+      h1 { font-size: 2.8rem; }
+      .hero-meta { gap: 16px; }
+      .feature-grid, .menu-grid, .reviews-grid, .form-grid { grid-template-columns: 1fr; }
+      .section { padding: 62px 0; }
+      .dish-image { min-height: 150px; }
+      .contact-form, .contact-info { padding: 22px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">🍽️ Fresh ingredients · Made with love · Every single day</div>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#home" aria-label="Zaika House home"><span class="logo-mark">✦</span><span>Zaika House<small>Restaurant & Cafe</small></span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a><a href="#menu">Our Menu</a><a href="#about">Our Story</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a>
+        <a class="btn" href="#contact">Book a Table ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Welcome to Zaika House</span>
+          <h1>Good food.<br><em>Great mood.</em></h1>
+          <p>Delicious flavours, fresh ingredients, and a warm welcome. Come hungry, leave happy — your favourite table is waiting.</p>
+          <div class="hero-actions"><a class="btn" href="#menu">Explore Our Menu ↘</a><a class="btn btn-outline" href="#contact">Reserve a Table</a></div>
+          <div class="hero-meta"><div><strong>4.8/5 ★</strong>Guest rating</div><div><strong>Fresh daily</strong>Quality ingredients</div><div><strong>Since 2018</strong>Serving with love</div></div>
+        </div>
+        <div class="hero-art" aria-label="Illustration of a delicious meal">
+          <div class="hero-circle"><div class="food-plate">🍛</div></div>
+          <div class="floating-note note-one">🥬 Fresh & local<small>Quality you can taste</small></div>
+          <div class="floating-note note-two">❤️ Made with love<small>Every plate, every day</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container section">
+        <div class="section-head"><span class="eyebrow">Why dine with us?</span><h2>A little extra in every bite.</h2><p>We believe a great meal is more than food — it’s a moment worth sharing.</p></div>
+        <div class="feature-grid">
+          <article class="feature"><div class="feature-icon">🌿</div><h3>Fresh Ingredients</h3><p>Thoughtfully selected ingredients, prepared fresh for flavour you can feel good about.</p></article>
+          <article class="feature"><div class="feature-icon">👨‍🍳</div><h3>Made to Order</h3><p>Every dish is prepared with care, a dash of creativity, and our signature touch.</p></article>
+          <article class="feature"><div class="feature-icon">🫶</div><h3>Warm Hospitality</h3><p>Come as you are. We’ll take care of the food, the comfort, and the good vibes.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="menu">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">A taste of our kitchen</span><h2>Customer favourites</h2><p>A few much-loved picks from our menu. Prices and dishes can be customised for your restaurant.</p></div>
+        <div class="menu-grid">
+          <article class="dish"><div class="dish-image">🍲</div><div class="dish-body"><div class="dish-title"><h3>Signature Paneer Curry</h3><span class="price">₹249</span></div><p>Soft paneer in a rich, creamy, aromatic house gravy.</p><span class="tag">★ Bestseller</span></div></article>
+          <article class="dish"><div class="dish-image">🍚</div><div class="dish-body"><div class="dish-title"><h3>Veg Dum Biryani</h3><span class="price">₹199</span></div><p>Fragrant basmati rice, garden vegetables, and warming spices.</p><span class="tag">Chef’s pick</span></div></article>
+          <article class="dish"><div class="dish-image">🍕</div><div class="dish-body"><div class="dish-title"><h3>Garden Fresh Pizza</h3><span class="price">₹279</span></div><p>Crisp crust topped with veggies, herbs, and melted cheese.</p><span class="tag">Vegetarian</span></div></article>
+          <article class="dish"><div class="dish-image">🥗</div><div class="dish-body"><div class="dish-title"><h3>Crunchy Garden Salad</h3><span class="price">₹149</span></div><p>Seasonal greens, crunchy vegetables, and a tangy dressing.</p><span class="tag">Fresh & light</span></div></article>
+          <article class="dish"><div class="dish-image">🍔</div><div class="dish-body"><div class="dish-title"><h3>House Special Burger</h3><span class="price">₹179</span></div><p>A hearty patty, crisp lettuce, house sauce, and a toasted bun.</p><span class="tag">Guest favourite</span></div></article>
+          <article class="dish"><div class="dish-image">🍰</div><div class="dish-body"><div class="dish-title"><h3>Chocolate Dessert</h3><span class="price">₹129</span></div><p>A rich chocolate treat — the sweetest way to finish your meal.</p><span class="tag">Sweet ending</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about section" id="about">
+      <div class="container about-grid">
+        <div class="about-art" aria-label="Chef cooking illustration">👨‍🍳</div>
+        <div><span class="eyebrow">Our story</span><h2>Food tastes better when it brings us together.</h2><p>At Zaika House, we’re passionate about turning everyday meals into memorable moments. Our kitchen brings familiar comfort and exciting flavours together, using fresh ingredients and a whole lot of heart.</p><p>Whether it’s a quick lunch, a family dinner, or a little celebration, there’s always a seat for you here.</p>
+          <div class="about-points"><div class="about-point"><strong>100%</strong><span>Made with care</span></div><div class="about-point"><strong>7 days</strong><span>Here for your cravings</span></div></div>
+          <a class="btn" href="#contact">Come say hello ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Kind words</span><h2>Our guests say it best.</h2><p>Replace these sample reviews with real customer feedback when your site is ready.</p></div>
+        <div class="reviews-grid">
+          <article class="review"><div class="stars">★★★★★</div><p>“Lovely atmosphere and really flavourful food. The staff made us feel right at home!”</p><strong>— A happy guest</strong></article>
+          <article class="review"><div class="stars">★★★★★</div><p>“Great portions, fresh ingredients, and a menu with something for everyone.”</p><strong>— A regular visitor</strong></article>
+          <article class="review"><div class="stars">★★★★★</div><p>“The perfect place for dinner with friends. Already planning our next visit.”</p><strong>— Food lover</strong></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact section" id="contact">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Let’s make it delicious</span><h2>Visit us or book your table.</h2><p>Update the sample contact details below with your restaurant’s real information.</p></div>
+        <div class="contact-grid">
+          <aside class="contact-info">
+            <h3>We’d love to see you.</h3>
+            <p>Drop by for a meal, a celebration, or just something delicious.</p>
+            <div class="contact-row"><span>📍</span><div><b>Address</b>123 Food Street, Your City, India</div></div>
+            <div class="contact-row"><span>📞</span><div><b>Call us</b>+91 98765 43210</div></div>
+            <div class="contact-row"><span>🕒</span><div><b>Opening hours</b>Every day · 11:00 AM – 11:00 PM</div></div>
+            <div class="contact-row"><span>✉️</span><div><b>Email</b>hello@yourrestaurant.com</div></div>
+          </aside>
+          <form class="contact-form" id="bookingForm">
+            <h3>Request a reservation</h3>
+            <div class="form-grid">
+              <div class="field"><label for="name">Your name</label><input id="name" name="name" placeholder="Enter your name" required></div>
+              <div class="field"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" placeholder="+91..." required></div>
+              <div class="field"><label for="date">Date</label><input id="date" name="date" type="date" required></div>
+              <div class="field"><label for="guests">Guests</label><select id="guests" name="guests"><option>1 person</option><option selected>2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6+ people</option></select></div>
+            </div>
+            <div class="field"><label for="message">Special request (optional)</label><textarea id="message" name="message" placeholder="Any special occasion or request?"></textarea></div>
+            <button class="btn" type="submit">Send Booking Request ↗</button>
+            <p class="form-note">Demo form: it opens your messaging app with the details. Add your real WhatsApp number in the code before publishing.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="logo" href="#home"><span class="logo-mark">✦</span><span>Zaika House<small>Restaurant & Cafe</small></span></a>
+      <div class="footer-links"><a href="#menu">Menu</a><a href="#about">Our Story</a><a href="#contact">Contact</a></div>
+      <div class="copyright">© <span id="year"></span> Zaika House. Made with ❤️</div>
+    </div>
+  </footer>
+  <div class="toast" id="toast" role="status"></div>
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.textContent = isOpen ? '✕' : '☰';
+    });
+    document.querySelectorAll('#navLinks a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = '☰';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const toast = document.getElementById('toast');
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 5000);
+    }
+
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const data = new FormData(this);
+      const name = data.get('name');
+      const phone = data.get('phone');
+      const date = data.get('date');
+      const guests = data.get('guests');
+      const message = data.get('message') || 'No special request';
+      // Replace 919876543210 with your restaurant's WhatsApp number (country code + number, digits only).
+      const restaurantWhatsAppNumber = '919876543210';
+      const text = `Hello Zaika House! I would like to request a table reservation.%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0ADate: ${encodeURIComponent(date)}%0AGuests: ${encodeURIComponent(guests)}%0ASpecial request: ${encodeURIComponent(message)}`;
+      if (restaurantWhatsAppNumber === '919876543210') {
+        showToast('Demo booking: code mein apna WhatsApp number update karein, phir booking WhatsApp par bheji ja sakti hai.');
+        return;
+      }
+      window.open(`https://wa.me/${restaurantWhatsAppNumber}?text=${text}`, '_blank', 'noopener');
+    });
+    // Prevent selecting a past reservation date.
+    document.getElementById('date').min = new Date().toISOString().split('T')[0];
+  </script>
+</body>
+</html>
